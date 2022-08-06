@@ -1,5 +1,7 @@
+import 'package:badges/badges.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:whatsapp_clone/pages/chats.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -10,17 +12,24 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  List<Widget> pages = [];
+  List<Widget> pages = [
+    const Chats(),
+    const Chats(),
+    const Chats(),
+    const Chats(),
+  ];
   var currentIndex = 3;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: IndexedStack(
-        index: currentIndex,
+        index: 3,
         children: pages,
       ),
       bottomNavigationBar: BottomNavigationBar(
+        unselectedFontSize: 12,
+        selectedFontSize: 12,
         type: BottomNavigationBarType.fixed,
         currentIndex: currentIndex,
         iconSize: 30,
@@ -29,9 +38,9 @@ class _HomeState extends State<Home> {
             label: "Status",
             icon: Builder(builder: (context) {
               if (currentIndex == 0) {
-                return Icon(CupertinoIcons.circle_grid_hex_fill);
+                return const Icon(CupertinoIcons.circle_grid_hex_fill);
               } else {
-                return Icon(CupertinoIcons.circle_grid_hex);
+                return const Icon(CupertinoIcons.circle_grid_hex);
               }
             }),
           ),
@@ -57,13 +66,20 @@ class _HomeState extends State<Home> {
           ),
           BottomNavigationBarItem(
             label: "Chats",
-            icon: Builder(builder: (context) {
-              if (currentIndex == 3) {
-                return Icon(CupertinoIcons.chat_bubble_2_fill);
-              } else {
-                return Icon(CupertinoIcons.chat_bubble_2);
-              }
-            }),
+            icon: Badge(
+              badgeContent: const Text(
+                "10",
+                style: TextStyle(color: Colors.white),
+              ),
+              position: BadgePosition.topEnd(top: -5, end: -14),
+              child: Builder(builder: (context) {
+                if (currentIndex == 3) {
+                  return const Icon(CupertinoIcons.chat_bubble_2_fill);
+                } else {
+                  return const Icon(CupertinoIcons.chat_bubble_2);
+                }
+              }),
+            ),
           ),
           BottomNavigationBarItem(
             label: "Settings",

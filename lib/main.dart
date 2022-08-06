@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:whatsapp_clone/pages/home.dart';
+import 'package:whatsapp_clone/utility/custom_theme.dart';
 import 'package:whatsapp_clone/utility/routes.dart';
 
 void main() {
@@ -14,6 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       routes: Routes.routes,
+      theme: CustomThemeData.light,
       home: const Home(),
     );
   }

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Chats extends StatefulWidget {
@@ -11,6 +12,27 @@ class Chats extends StatefulWidget {
 class _ChatsState extends State<Chats> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("data"),
+      ),
+      body: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            actions: <Widget>[
+              Icon(
+                Icons.person,
+                size: 40,
+              )
+            ],
+            title: Text("Slive"),
+            leading: CupertinoButton(child: Text("Edit"), onPressed: () {}),
+            expandedHeight: 100.0,
+            floating: true,
+            pinned: true,
+          )
+        ],
+      ),
+    );
   }
 }
