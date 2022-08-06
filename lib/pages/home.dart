@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -9,8 +10,79 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  List<Widget> pages = [];
+  var currentIndex = 3;
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      body: IndexedStack(
+        index: currentIndex,
+        children: pages,
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        currentIndex: currentIndex,
+        iconSize: 30,
+        items: [
+          BottomNavigationBarItem(
+            label: "Status",
+            icon: Builder(builder: (context) {
+              if (currentIndex == 0) {
+                return Icon(CupertinoIcons.circle_grid_hex_fill);
+              } else {
+                return Icon(CupertinoIcons.circle_grid_hex);
+              }
+            }),
+          ),
+          BottomNavigationBarItem(
+            label: "Calls",
+            icon: Builder(builder: (context) {
+              if (currentIndex == 1) {
+                return const Icon(CupertinoIcons.phone_fill);
+              } else {
+                return const Icon(CupertinoIcons.phone);
+              }
+            }),
+          ),
+          BottomNavigationBarItem(
+            label: "Camera",
+            icon: Builder(builder: (context) {
+              if (currentIndex == 2) {
+                return Icon(CupertinoIcons.camera_fill);
+              } else {
+                return Icon(CupertinoIcons.camera);
+              }
+            }),
+          ),
+          BottomNavigationBarItem(
+            label: "Chats",
+            icon: Builder(builder: (context) {
+              if (currentIndex == 3) {
+                return Icon(CupertinoIcons.chat_bubble_2_fill);
+              } else {
+                return Icon(CupertinoIcons.chat_bubble_2);
+              }
+            }),
+          ),
+          BottomNavigationBarItem(
+            label: "Settings",
+            icon: Builder(builder: (context) {
+              if (currentIndex == 4) {
+                return Icon(CupertinoIcons.settings_solid);
+              } else {
+                return Icon(CupertinoIcons.settings);
+              }
+            }),
+          )
+        ],
+        onTap: (index) {
+          print(index);
+          setState(() {
+            currentIndex = index;
+          });
+        },
+      ),
+    );
   }
 }
