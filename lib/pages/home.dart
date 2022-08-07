@@ -2,6 +2,7 @@ import 'package:badges/badges.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsapp_clone/pages/chats.dart';
+import 'package:whatsapp_clone/pages/status.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -13,6 +14,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   List<Widget> pages = [
+    const Status(),
     const Chats(),
     const Chats(),
     const Chats(),
@@ -24,7 +26,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: IndexedStack(
-        index: 3,
+        index: currentIndex,
         children: pages,
       ),
       bottomNavigationBar: BottomNavigationBar(

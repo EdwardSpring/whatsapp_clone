@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -13,13 +15,19 @@ class _ChatsState extends State<Chats> {
   var title = "Chats";
   var fadeState = CrossFadeState.showFirst;
   late var appBar = unScrolledAppBar();
+  var tapColor = Colors.grey[400];
+  var normalColor;
+  var tileColor;
 
   ScrollController scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    // appBar = unScrolledAppBar();
+    normalColor = Theme.of(context).scaffoldBackgroundColor;
+    Timer timer;
+    // tileColor = normalColor;
+
     return Scaffold(
       appBar: appBar,
       body: Padding(
@@ -143,10 +151,31 @@ class _ChatsState extends State<Chats> {
     });
   }
 
+  @override
+  void dispose() {
+    scrollController.dispose();
+    super.dispose();
+  }
+
   archiveTile(size) {
+    tileColor == Theme.of(context).scaffoldBackgroundColor;
     return GestureDetector(
-      onTap: () {},
+      onTapDown: (TapDownDetails details) {},
+      onTapUp: (TapUpDetails details) {},
+      onTap: () {
+        print("tapped");
+        setState(() {
+          tileColor = tapColor;
+        });
+        Timer(Duration(milliseconds: 300), () {
+          setState(() {
+            tileColor = normalColor;
+          });
+        });
+      },
+      onLongPress: () {},
       child: Container(
+        color: tileColor,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -164,7 +193,7 @@ class _ChatsState extends State<Chats> {
             ),
             Container(
               margin: EdgeInsets.only(top: 12),
-              padding: EdgeInsets.only(bottom: 10),
+              padding: EdgeInsets.only(bottom: 10, right: 10),
               width: size.width * 0.7,
               height: size.height * 0.043,
               decoration: const BoxDecoration(
